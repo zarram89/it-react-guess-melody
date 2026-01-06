@@ -23,24 +23,26 @@ function App({errorsCount, questions}: AppScreenProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<WelcomeScreen errorsCount={errorsCount}/>}
+          element={<WelcomeScreen errorsCount={errorsCount} />}
         />
         <Route
           path={AppRoute.DevArtist}
-          element={<ArtistQuestionScreen/>}
+          element={<ArtistQuestionScreen />}
         />
         <Route
           path={AppRoute.DevGenre}
-          element={<GenreQuestionScreen
-            question={firstQuestion as QuestionGenre}
-            onAnswer={() => {
-              throw new Error('Function \'onAnswer\' isn\'t implemented.');
-            }}
-          />}
+          element={
+            <GenreQuestionScreen
+              question={firstQuestion as QuestionGenre}
+              onAnswer={() => {
+                throw new Error('Function \'onAnswer\' isn\'t implemented.');
+              }}
+            />
+          }
         />
         <Route
           path={AppRoute.Login}
-          element={<AuthScreen/>}
+          element={<AuthScreen />}
         />
         <Route
           path={AppRoute.Result}
@@ -54,11 +56,11 @@ function App({errorsCount, questions}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Lose}
-          element={<GameOverScreen/>}
+          element={<GameOverScreen />}
         />
         <Route
           path="*"
-          element={<NotFoundScreen/>}
+          element={<NotFoundScreen />}
         />
       </Routes>
     </BrowserRouter>
