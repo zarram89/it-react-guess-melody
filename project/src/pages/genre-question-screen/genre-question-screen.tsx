@@ -1,3 +1,4 @@
+import {useState, ChangeEvent} from 'react';
 import Logo from '../../components/logo/logo';
 import {QuestionGenre} from '../../types/question';
 
@@ -9,13 +10,17 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
   const {question} = props;
   const {answers, genre} = question;
 
+  const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
+
   return (
     <section className="game game--genre">
       <header className="game__header">
         <Logo />
 
         <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: 'url(#blur)', transform: 'rotate(-90deg) scaleY(-1)', transformOrigin: 'center'}}/>
+          <circle className="timer__line" cx="390" cy="390" r="370"
+            style={{filter: 'url(#blur)', transform: 'rotate(-90deg) scaleY(-1)', transformOrigin: 'center'}}
+          />
         </svg>
 
         <div className="game__mistakes">
@@ -39,7 +44,14 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps): JSX.Element {
                   />
                 </div>
                 <div className="game__answer">
-                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${id}`} id={`answer-${id}`}/>
+                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${id}`}
+                    id={`answer-${id}`}
+                    checked={userAnswers[id]}
+                    onChange={({target}: ChangeEvent<HTMLInputElement>) => {
+                      const value = target.checked;
+                      setUserAnswers([...userAnswers.slice(0, id), value, ...userAnswers.slice(id + 1)]);
+                    }}
+                  />
                   <label className="game__check" htmlFor={`answer-${id}`}>Отметить</label>
                 </div>
               </div>
