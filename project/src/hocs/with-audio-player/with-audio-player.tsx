@@ -3,7 +3,7 @@ import {useState} from 'react';
 import AudioPlayer from '../../components/audio-player/audio-player';
 
 type HOCProps = {
-  renderPlayer: (src: string, id: number) => void
+  renderPlayer: (src: string, id: number) => void;
 };
 
 function withAudioPlayer<T>(Component: ComponentType<T>)
